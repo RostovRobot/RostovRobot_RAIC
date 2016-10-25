@@ -11,5 +11,15 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         public int X;
         public int Y;
         public TileType type;
+        public Tile(int x,int y, TileType ttype)
+        {
+            X = x;
+            Y = y;
+            type = ttype;
+
+        }
+
+        
+
     }
 }
