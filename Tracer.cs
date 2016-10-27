@@ -52,68 +52,96 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
 
             int counter = 0;
-            
+            int tHeaded = 0;
 
 
 
             return null;
         }
 
-
-        public void stepTile(Tile[,] masOfTiles, int[] cPos, int counter, int[,] mapI, int[] cOld)
+        public void getSosed(Tile[,] masOfTiles, int[] cPos, int n)
         {
-            int x=0;
-            int y=0;
-            mapI[cPos[0],cPos[1]] = counter;
-            switch(masOfTiles[cPos[0],cPos[1]].type)
+            List<Tile> masOfSoseds = new List<Tile>();
+            switch (masOfTiles[cPos[0], cPos[1]].type)
             {
                 case TileType.LeftTopCorner:
-                    if (cOld[0] > cPos[0])
-                    {
-                        y = 1;
-                    }
-                    else
-                    { x = 1; } break;
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    break;
+
                 case TileType.RightBottomCorner:
-                    if(cOld[0]<cPos[0])
-                    {
-                        y = -1;
-                    }
-                    else
-                    { x = -1; } break;
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    break;
+
                 case TileType.RightTopCorner:
-                    if(cOld[0]<cPos[0])
-                    {
-                        y = 1;
-                    }
-                    else
-                    { x = -1; } break;
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    break;
+
                 case TileType.LeftBottomCorner:
-                    if(cOld[0]>cPos[0])
-                    {
-                        y = -1;
-                    }
-                    else
-                    { x = 1; } break;
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    break;
 
                 case TileType.Horizontal:
-                    if(cOld[0]>cPos[0])
-                    {
-                        x = -1;
-                    }
-                    else
-                    { x = 1; } break;
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    break;
                 case TileType.Vertical:
-                    if(cOld[1]>cPos[1])
-                    {
-                        y = -1;
-                    }
-                    else
-                    { y = 1; } break;
-                    
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    break;
+
+                case TileType.Crossroads:
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    break;
+
+                case TileType.BottomHeadedT:
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    break;
+
+                case TileType.LeftHeadedT:
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    break;
+
+                case TileType.RightHeadedT:
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    break;
+
+                case TileType.TopHeadedT:                  
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    break;
 
                 default: break;
             }
+        }
+
+        public void stepTile(Tile[,] masOfTiles, int[] cPos, int counter, int tHeaded, int[,] mapI, int[] cOld, Car self)
+        {
+            int x=0;
+            int y=0;
+            mapI[cPos[0], cPos[1]] = 0;
+
+            while ((cPos[0] != self.NextWaypointX) && (cPos[1] != self.NextWaypointY))
+            {
+
+
+
+
+            }
+
 
 
 
