@@ -42,8 +42,8 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
             //
             //
             //Ткаченко Сергей
-
             
+
             double an = self.GetAngleTo(self.NextWaypointX*800+400, self.NextWaypointY*800+400);
             double P = kp * an;
             double D = kd * (an - anOld);
