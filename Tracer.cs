@@ -11,7 +11,6 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         //Tile[,] masOfTiles;
         
 
-
         public List<Tile> getTrace(World world, Game game, Car self)
         {
             //My Position
