@@ -23,7 +23,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 double Y; //= (tiles[1].Y - 0.5D) * game.TrackTileSize;
                 X = (tiles[1].X - 0.5D) * game.TrackTileSize + (tiles[2].X - tiles[0].X) * k * game.TrackTileSize;
                 Y = (tiles[1].Y - 0.5D) * game.TrackTileSize + (tiles[2].Y - tiles[0].Y) * k * game.TrackTileSize;
-                return new double[2] { X, Y };
+                return new double[2] { X, Y };//Try again
             }
         }
     }
