@@ -11,8 +11,12 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         //Tile[,] masOfTiles;
         
 
-        public /*List<Tile>*/ void getTrace(World world, Game game, Car self)
+        public List<Tile> getTrace(World world, Game game, Car self)
         {
+            //НЕ НАДО ИЗМЕНЯТЬ ТИП ОЗВРАЩАЕМОГО ЗНАЧЕНИЯ!!!!!
+            //это фундаментальная вещь для командной работы - остальные УЖЕ рассчитывают, что метод getTrace вернет коллекцию тайлов
+            //если необходимо изменить тип, то обязательно обсуждаем это (на он-лайн встрече, в группе ВК или еще где-то)
+
             //My Position
             int[] myP= new int[2];
             myP[0] = (int)(self.X / 800);
@@ -61,7 +65,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
 
 
-            //return null;
+            return null;
         }
 
         public List<Tile> getSosed(Tile[,] masOfTiles, int[] cPos)

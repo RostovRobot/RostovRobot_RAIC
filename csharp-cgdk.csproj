@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrashProtect.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="iPoint.cs" />
     <Compile Include="Model\Bonus.cs" />
     <Compile Include="Model\BonusType.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Runner.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Tracer.cs" />
+    <Compile Include="VisualClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

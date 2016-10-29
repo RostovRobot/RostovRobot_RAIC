@@ -11,6 +11,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         double k = 0.3;//Коэффицент смещения от центра тайла Мах=0.5, Min=0;
         public double[] getNextPointXY(List<Tile> tiles, World world, Game game, Car self)
         {
+            //надо постараться переделать метод так, чтобы он возвращал массив Int, а не double
             TileType t = tiles[0].type;
             if ((tiles[0].X == tiles[2].X) || (tiles[0].Y == tiles[2].Y))
             {
