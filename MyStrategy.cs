@@ -14,10 +14,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
         public void Move(Car self, World world, Game game, Move move) {
             if (world.Tick > game.InitialFreezeDurationTicks) //проверяем, что прошло уже 300 первых тиков бездействия
             {
-                if (crPotect.isCrash(self))
+                if (crPotect.isCrash(self, move))
                 {
                     //вызов действий при залипании
-                    crPotect.CrashedMove();
                 } else {
                     List<Tile> traceTiles = tracer.getTrace(world, game, self);
                     //вот тут мы отрисовываем полученную коллекцию тайлов

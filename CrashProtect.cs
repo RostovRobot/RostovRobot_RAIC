@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,13 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         private int Timedown = 30;  //необходимо подобрать
         public bool isCrash(Car self, Move move)
         {
+            //НЕ НАДО МЕНЯТЬ ВХОДНЫЕ ПАРАМЕТРЫ!!!!
+            //объекта move во входных параметрах не было, теперь он откуда-то появился
+            //зачем он нужен в этом методе? Этот метод только говорит, застряла ли машинка
+            //он не должен ничем управлять, это задача других методов
+
+            //исправьте, пожалуйста, так, чтобы здесь метод move не было
+
             double deltaX = self.X - oldX;
             double deltaY = self.Y - oldY;
             double delta = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
