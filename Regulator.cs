@@ -19,6 +19,8 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         private double dt = 0.001;
         public double getU(int X, int Y, Car self)
         {
+            //необходимо поменять типы входных параметров X и Y на double
+
             double err = self.GetAngleTo(X, Y);
             double P = err * kp;
             double D = kd * (err - errOld)/dt;
@@ -29,6 +31,16 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             errOld = err;
 
             return U;
+        }
+
+        public void setKP(double koeff)
+        {
+            kp = koeff;
+        }
+
+        public void setKP_jipp()
+        {
+            kp = 1.5D;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
         public void CrashedMove()
         {
-
+            //изменяем скорость и направление машинки на зеркальное
         }
     }
 }
