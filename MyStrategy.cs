@@ -20,8 +20,18 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
                 } else {
                     List<Tile> traceTiles = tracer.getTrace(world, game, self);
                     //вот тут мы отрисовываем полученную коллекцию тайлов
+                    painter.PaintTile(traceTiles);
+
                     double[] nextPointCoordinate = ipoint.getNextPointXY(traceTiles, world, game, self);
                     //вот тут мы отрисовываем полученный массив точек
+                    if (nextPointCoordinate.Length > 3) //если в массиве больше 3 значений (две и больше точек в массиве)
+                    { //то
+                        painter.PaintLineSeria(nextPointCoordinate); //отрисовываем последовательность линий
+                    }else
+                    { //иначе
+                        if(nextPointCoordinate.Length>1) painter.PaintPoint(nextPointCoordinate[0], nextPointCoordinate[1]); //отрисовываем одну точку
+                    }
+
                     int[] nextPointIntCoordinate = new int[nextPointCoordinate.Length];
                     for (int i = 0; i < nextPointCoordinate.Length; i++)
                     {
