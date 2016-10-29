@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +8,13 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 {
     class CrashProtect
     {
-        private int steps=0;
+        private int steps = 0;
         private double oldX = 0;
         private double oldY = 0;
-        private int deltaPorog = 150; //необходимо подобрать
+        private int deltaPorog = 150;  //необходимо подобрать
         private int stepsPorog = 30;  //необходимо подобрать
-
-        public bool isCrash(Car self)
+        private int Timedown = 30;  //необходимо подобрать
+        public bool isCrash(Car self, Move move)
         {
             double deltaX = self.X - oldX;
             double deltaY = self.Y - oldY;
@@ -23,23 +23,36 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             if (delta < deltaPorog)
             {
                 steps++;
-            }else
+            }
+            else
             {
                 steps = 0;
                 oldX = self.X;
                 oldY = self.Y;
             }
-
-            if (steps>stepsPorog)
+            if(Timedown == 0)
             {
+                Timedown = 30;
+            }
+            if (steps > stepsPorog)
+            {
+                
+
+                move.EnginePower = 0.0;
+                steps--;
                 return true;
             }
             return false;
         }
 
-        public void CrashedMove()
+        public void CrashedMove(Move move)
         {
-            //изменяем скорость и направление машинки на зеркальное
+            
+            if (Timedown != 0)
+            {
+                Timedown--;
+                move.EnginePower = -1.0;
+            }
         }
     }
 }
