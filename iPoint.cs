@@ -27,6 +27,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 return new double[2] { X, Y };//Try again
             }
 
+            //комментарий Сергея из секции
             //если вычисляется что-то странное или возникла ошибка,
             //то возвращаем координаты центра след вейпоинта.
         }
