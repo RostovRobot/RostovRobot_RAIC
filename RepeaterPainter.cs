@@ -9,7 +9,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
     {
         private VisualClient vc;
         private bool flag = false;
-        
+
         /// <summary>
         /// Создает клиент для отрисовки со стандартными параметрами (порт 13579)
         /// </summary>
@@ -18,9 +18,10 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             try
             {
                 vc = new VisualClient("localhost", 13579);
-                vc.BeginPost();
+                //vc.BeginPost();
                 flag = true;
-            }catch(Exception e) { flag = false; }
+            }
+            catch (Exception e) { flag = false; }
         }
 
         /// <summary>
@@ -65,13 +66,15 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="tile">Объект-тайл для отрисовки</param>
         public void PaintTile(Tile tile)
         {
-            if(flag)
+            if (flag)
             {
                 double x1 = tile.X * 800 - 400;
                 double y1 = tile.Y * 800 - 400;
                 double x2 = tile.X * 800 + 400;
                 double y2 = tile.Y * 800 + 400;
+                vc.BeginPost();
                 vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
+                vc.EndPost();
             }
         }
 
@@ -91,7 +94,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 float r = 0.1f;
                 float g = 0.1f;
                 float b = 0.1f;
+                vc.BeginPost();
                 vc.FillRect(x1, y1, x2, y2, r, g, b);
+                vc.EndPost();
             }
         }
 
@@ -108,7 +113,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 double y1 = tileY * 800 - 400;
                 double x2 = tileX * 800 + 400;
                 double y2 = tileY * 800 + 400;
+                vc.BeginPost();
                 vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
+                vc.EndPost();
             }
         }
 
@@ -129,7 +136,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 float r = 0.1f;
                 float g = 0.1f;
                 float b = 0.1f;
+                vc.BeginPost();
                 vc.FillRect(x1, y1, x2, y2, r, g, b);
+                vc.EndPost();
             }
         }
 
@@ -141,6 +150,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
+                vc.BeginPost();
                 foreach (Tile tile in tiles)
                 {
                     double x1 = tile.X * 800 - 400;
@@ -149,6 +159,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     double y2 = tile.Y * 800 + 400;
                     vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
                 }
+                vc.EndPost();
             }
         }
 
@@ -161,6 +172,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
+                vc.BeginPost();
                 foreach (Tile tile in tiles)
                 {
                     double x1 = tile.X * 800 - 400;
@@ -172,6 +184,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     float b = 0.1f;
                     vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
                 }
+                vc.EndPost();
             }
         }
 
@@ -186,7 +199,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             {
                 int intX = Convert.ToInt32(X);
                 int intY = Convert.ToInt32(Y);
+                vc.BeginPost();
                 vc.Circle(intX, intY, 3, 0.0f, 1.0f, 0.0f);
+                vc.EndPost();
             }
         }
 
@@ -205,7 +220,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 float r = 0.0f;
                 float g = 1.0f;
                 float b = 0.0f;
+                vc.BeginPost();
                 vc.Circle(intX, intY, 3, r, g, b);
+                vc.EndPost();
             }
         }
 
@@ -215,12 +232,13 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="seria">Массив координат точек, задающих линии</param>
         public void PaintLineSeria(double[] seria)
         {
-            if (flag && seria.Length>3)
+            if (flag && seria.Length > 3)
             {
-                for(int i=1; i<seria.Length/2;i++)
+                vc.BeginPost();
+                for (int i = 1; i < seria.Length / 2; i++)
                 {
-                    double x1 = seria[(i-1) * 2];
-                    double y1 = seria[(i-1) * 2 + 1];
+                    double x1 = seria[(i - 1) * 2];
+                    double y1 = seria[(i - 1) * 2 + 1];
                     double x2 = seria[i * 2];
                     double y2 = seria[i * 2 + 1];
                     int intx1 = Convert.ToInt32(x1);
@@ -229,6 +247,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     int inty2 = Convert.ToInt32(y2);
                     vc.Line(intx1, inty1, intx2, inty2, 1.0f, 0.0f, 0.0f);
                 }
+                vc.EndPost();
             }
         }
 
@@ -241,6 +260,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag && seria.Length > 3)
             {
+                vc.BeginPost();
                 for (int i = 1; i < seria.Length / 2; i++)
                 {
                     double x1 = seria[(i - 1) * 2];
@@ -256,6 +276,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     int inty2 = Convert.ToInt32(y2);
                     vc.Line(intx1, inty1, intx2, inty2, r, g, b);
                 }
+                vc.EndPost();
             }
         }
 
@@ -270,14 +291,16 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                    float r = 1.0f;
-                    float g = 0.0f;
-                    float b = 0.0f;
-                    int intx1 = Convert.ToInt32(X1);
-                    int inty1 = Convert.ToInt32(Y1);
-                    int intx2 = Convert.ToInt32(X2);
-                    int inty2 = Convert.ToInt32(Y2);
-                    vc.Line(intx1, inty1, intx2, inty2, r, g, b);
+                float r = 1.0f;
+                float g = 0.0f;
+                float b = 0.0f;
+                int intx1 = Convert.ToInt32(X1);
+                int inty1 = Convert.ToInt32(Y1);
+                int intx2 = Convert.ToInt32(X2);
+                int inty2 = Convert.ToInt32(Y2);
+                vc.BeginPost();
+                vc.Line(intx1, inty1, intx2, inty2, r, g, b);
+                vc.EndPost();
             }
         }
     }
