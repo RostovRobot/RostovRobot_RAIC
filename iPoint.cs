@@ -45,13 +45,13 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             //TileType t = tiles[0].type;
             if ((tiles[i-1].X == tiles[i+1].X) || (tiles[i-1].Y == tiles[i+1].Y))
             {
-                return new double[2] { (tiles[i].X - 0.5D) * game.TrackTileSize, (tiles[i].Y - 0.5D) * game.TrackTileSize };
+                return new double[2] { (tiles[i].X + 0.5D) * game.TrackTileSize, (tiles[i].Y + 0.5D) * game.TrackTileSize };
 
             }
             else
             {
-                double X = (tiles[i].X - 0.5D) * game.TrackTileSize + (tiles[i+1].X - tiles[i-1].X) * k * game.TrackTileSize;
-                double Y = (tiles[i].Y - 0.5D) * game.TrackTileSize + (tiles[i+1].Y - tiles[i-1].Y) * k * game.TrackTileSize;
+                double X = (tiles[i].X + 0.5D) * game.TrackTileSize + (tiles[i+1].X + tiles[i-1].X) * k * game.TrackTileSize;
+                double Y = (tiles[i].Y + 0.5D) * game.TrackTileSize + (tiles[i+1].Y + tiles[i-1].Y) * k * game.TrackTileSize;
                 return new double[2] { X, Y };//Try again
             }
 
@@ -65,16 +65,23 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             //а учитываться в регуляторе будут только первые две
             //формат такого массива: [100,100,200,100,300,100]
             //TileType t = tiles[0].type;
-            if ((tiles[0].X == tiles[2].X) || (tiles[0].Y == tiles[2].Y))
-            {
-                return new double[2] { (tiles[1].X - 0.5D) * game.TrackTileSize, (tiles[1].Y - 0.5D) * game.TrackTileSize };
-                //Подправь код, значение по X возвращается отрицательным(-0,5). Возможно стоит написать +0,5.
-            }
+            if (tiles.Count < 3)
+            { return new double[2] { (tiles[1].X + 0.5D) * game.TrackTileSize, (tiles[1].Y + 0.5D) * game.TrackTileSize }; }
             else
             {
-                double X = (tiles[1].X - 0.5D) * game.TrackTileSize + (tiles[2].X - tiles[0].X) * k * game.TrackTileSize;
-                double Y = (tiles[1].Y - 0.5D) * game.TrackTileSize + (tiles[2].Y - tiles[0].Y) * k * game.TrackTileSize;
-                return new double[2] { X, Y };//Try again
+                if ((tiles[0].X == tiles[2].X) || (tiles[0].Y == tiles[2].Y))
+                {
+                    return new double[2] { (tiles[1].X + 0.5D) * game.TrackTileSize, (tiles[1].Y + 0.5D) * game.TrackTileSize };
+                    //Подправь код, значение по X возвращается отрицательным(-0,5). Возможно стоит написать +0,5.
+                    //22:18 Пробуем!
+
+                }
+                else
+                {
+                    double X = (tiles[1].X + 0.5D) * game.TrackTileSize + (tiles[2].X - tiles[0].X) * k * game.TrackTileSize;
+                    double Y = (tiles[1].Y + 0.5D) * game.TrackTileSize + (tiles[2].Y - tiles[0].Y) * k * game.TrackTileSize;
+                    return new double[2] { X, Y };//Try again
+                }
             }
 
             //комментарий Сергея из секции
