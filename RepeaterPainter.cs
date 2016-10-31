@@ -68,13 +68,13 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                double x1 = tile.X * 800 - 400;
-                double y1 = tile.Y * 800 - 400;
-                double x2 = tile.X * 800 + 400;
-                double y2 = tile.Y * 800 + 400;
-                vc.BeginPost();
-                vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
-                vc.EndPost();
+                double x1 = tile.X * 800;
+                double y1 = tile.Y * 800;
+                double x2 = (tile.X+1) * 800;
+                double y2 = (tile.Y+1) * 800;
+                //vc.BeginPre();
+                vc.FillRect(x1, y1, x2, y2, 1.0f, 1.0f, 0.0f);
+                //vc.EndPre();
             }
         }
 
@@ -87,16 +87,16 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                double x1 = tile.X * 800 - 400;
-                double y1 = tile.Y * 800 - 400;
-                double x2 = tile.X * 800 + 400;
-                double y2 = tile.Y * 800 + 400;
-                float r = 0.1f;
-                float g = 0.1f;
-                float b = 0.1f;
-                vc.BeginPost();
+                double x1 = tile.X * 800;
+                double y1 = tile.Y * 800;
+                double x2 = (tile.X + 1) * 800;
+                double y2 = (tile.Y + 1) * 800;
+                float r = 1.0f;
+                float g = 1.0f;
+                float b = 0.0f;
+                //vc.BeginPre();
                 vc.FillRect(x1, y1, x2, y2, r, g, b);
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -109,13 +109,13 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                double x1 = tileX * 800 - 400;
-                double y1 = tileY * 800 - 400;
-                double x2 = tileX * 800 + 400;
-                double y2 = tileY * 800 + 400;
-                vc.BeginPost();
-                vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
-                vc.EndPost();
+                double x1 = tileX * 800;
+                double y1 = tileY * 800;
+                double x2 = (tileX + 1) * 800;
+                double y2 = (tileY + 1) * 800;
+                //vc.BeginPre();
+                vc.FillRect(x1, y1, x2, y2, 1.0f, 1.0f, 0.0f);
+                //vc.EndPre();
             }
         }
 
@@ -129,16 +129,16 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                double x1 = tileX * 800 - 400;
-                double y1 = tileY * 800 - 400;
-                double x2 = tileX * 800 + 400;
-                double y2 = tileY * 800 + 400;
-                float r = 0.1f;
-                float g = 0.1f;
-                float b = 0.1f;
-                vc.BeginPost();
+                double x1 = tileX * 800;
+                double y1 = tileY * 800;
+                double x2 = (tileX + 1) * 800;
+                double y2 = (tileY + 1) * 800;
+                float r = 1.0f;
+                float g = 1.0f;
+                float b = 0.0f;
+                //vc.BeginPre();
                 vc.FillRect(x1, y1, x2, y2, r, g, b);
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -150,16 +150,19 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                vc.BeginPost();
+                //vc.BeginPre();
                 foreach (Tile tile in tiles)
                 {
-                    double x1 = tile.X * 800 - 400;
-                    double y1 = tile.Y * 800 - 400;
-                    double x2 = tile.X * 800 + 400;
-                    double y2 = tile.Y * 800 + 400;
-                    vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
+                    double x1 = tile.X * 800;
+                    double y1 = tile.Y * 800;
+                    double x2 = (tile.X + 1) * 800;
+                    double y2 = (tile.Y + 1) * 800;
+                    float r = 1.0F;
+                    float g = 1.0F;
+                    float b = 0.0F;
+                    vc.FillRect(x1, y1, x2, y2, r, g, b);
                 }
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -172,19 +175,19 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                vc.BeginPost();
+                //vc.BeginPre();
                 foreach (Tile tile in tiles)
                 {
-                    double x1 = tile.X * 800 - 400;
-                    double y1 = tile.Y * 800 - 400;
-                    double x2 = tile.X * 800 + 400;
-                    double y2 = tile.Y * 800 + 400;
-                    float r = 0.1f;
-                    float g = 0.1f;
-                    float b = 0.1f;
-                    vc.FillRect(x1, y1, x2, y2, 0.1f, 0.1f, 0.1f);
+                    double x1 = tile.X * 800;
+                    double y1 = tile.Y * 800;
+                    double x2 = (tile.X + 1) * 800;
+                    double y2 = (tile.Y + 1) * 800;
+                    float r = 1.0f;
+                    float g = 1.0f;
+                    float b = 0.0f;
+                    vc.FillRect(x1, y1, x2, y2, r, g, b);
                 }
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -199,9 +202,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             {
                 int intX = Convert.ToInt32(X);
                 int intY = Convert.ToInt32(Y);
-                vc.BeginPost();
+                //vc.BeginPre();
                 vc.Circle(intX, intY, 3, 0.0f, 1.0f, 0.0f);
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -220,9 +223,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 float r = 0.0f;
                 float g = 1.0f;
                 float b = 0.0f;
-                vc.BeginPost();
+                //vc.BeginPre();
                 vc.Circle(intX, intY, 3, r, g, b);
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -234,7 +237,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag && seria.Length > 3)
             {
-                vc.BeginPost();
+                //vc.BeginPre();
                 for (int i = 1; i < seria.Length / 2; i++)
                 {
                     double x1 = seria[(i - 1) * 2];
@@ -247,7 +250,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     int inty2 = Convert.ToInt32(y2);
                     vc.Line(intx1, inty1, intx2, inty2, 1.0f, 0.0f, 0.0f);
                 }
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -260,7 +263,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag && seria.Length > 3)
             {
-                vc.BeginPost();
+                //vc.BeginPre();
                 for (int i = 1; i < seria.Length / 2; i++)
                 {
                     double x1 = seria[(i - 1) * 2];
@@ -276,7 +279,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     int inty2 = Convert.ToInt32(y2);
                     vc.Line(intx1, inty1, intx2, inty2, r, g, b);
                 }
-                vc.EndPost();
+                //vc.EndPre();
             }
         }
 
@@ -298,9 +301,25 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 int inty1 = Convert.ToInt32(Y1);
                 int intx2 = Convert.ToInt32(X2);
                 int inty2 = Convert.ToInt32(Y2);
-                vc.BeginPost();
+                //vc.BeginPre();
                 vc.Line(intx1, inty1, intx2, inty2, r, g, b);
-                vc.EndPost();
+                //vc.EndPre();
+            }
+        }
+
+        public void startTick()
+        {
+            if (flag)
+            {
+                vc.BeginPre();
+            }
+        }
+
+        public void endTick()
+        {
+            if (flag)
+            {
+                vc.EndPre();
             }
         }
     }

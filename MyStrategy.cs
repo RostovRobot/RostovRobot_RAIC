@@ -14,6 +14,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
         public void Move(Car self, World world, Game game, Move move) {
             if (world.Tick > game.InitialFreezeDurationTicks) //проверяем, что прошло уже 300 первых тиков бездействия
             {
+                painter.startTick();
                 if (crPotect.isCrash(self, move))
                 {
                     //вызов действий при залипании
@@ -40,6 +41,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
 
                     move.WheelTurn = regul.getU(nextPointIntCoordinate[0], nextPointIntCoordinate[1], self);
                     move.EnginePower = 0.5D;
+                    painter.endTick();
                 }
             }
               
