@@ -29,7 +29,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
                         painter.PaintLineSeria(nextPointCoordinate); //отрисовываем последовательность линий
                     }else
                     { //иначе
-                        if (nextPointCoordinate.Length > 1) painter.PaintLine(self.X, self.Y, nextPointCoordinate[0], nextPointCoordinate[1]); //отрисовываем линию от машинки до точки
+                        if (nextPointCoordinate.Length > 1) painter.PaintLine(self.X, self.Y, nextPointCoordinate[0]+800, nextPointCoordinate[1]); //отрисовываем линию от машинки до точки
                     }
 
                     int[] nextPointIntCoordinate = new int[nextPointCoordinate.Length];
