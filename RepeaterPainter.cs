@@ -184,7 +184,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
-                vc.Circle(X, Y, 3, 0.0f, 1.0f, 0.0f);
+                int intX = Convert.ToInt32(X);
+                int intY = Convert.ToInt32(Y);
+                vc.Circle(intX, intY, 3, 0.0f, 1.0f, 0.0f);
             }
         }
 
@@ -198,10 +200,12 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         {
             if (flag)
             {
+                int intX = Convert.ToInt32(X);
+                int intY = Convert.ToInt32(Y);
                 float r = 0.0f;
                 float g = 1.0f;
                 float b = 0.0f;
-                vc.Circle(X, Y, 3, r, g, b);
+                vc.Circle(intX, intY, 3, r, g, b);
             }
         }
 
@@ -219,7 +223,11 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     double y1 = seria[(i-1) * 2 + 1];
                     double x2 = seria[i * 2];
                     double y2 = seria[i * 2 + 1];
-                    vc.Line(x1, y1, x2, y2, 1.0f, 0.0f, 0.0f);
+                    int intx1 = Convert.ToInt32(x1);
+                    int inty1 = Convert.ToInt32(y1);
+                    int intx2 = Convert.ToInt32(x2);
+                    int inty2 = Convert.ToInt32(y2);
+                    vc.Line(intx1, inty1, intx2, inty2, 1.0f, 0.0f, 0.0f);
                 }
             }
         }
@@ -242,8 +250,34 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     float r = 1.0f;
                     float g = 0.0f;
                     float b = 0.0f;
-                    vc.Line(x1, y1, x2, y2, r, g, b);
+                    int intx1 = Convert.ToInt32(x1);
+                    int inty1 = Convert.ToInt32(y1);
+                    int intx2 = Convert.ToInt32(x2);
+                    int inty2 = Convert.ToInt32(y2);
+                    vc.Line(intx1, inty1, intx2, inty2, r, g, b);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Рисует линию между двумя точками красного цвета
+        /// </summary>
+        /// <param name="X1">Координата X первой точки</param>
+        /// <param name="Y1">Координата Y первой точки</param>
+        /// <param name="X2">Координата X второй точки</param>
+        /// <param name="Y2">Координата Y второй точки</param>
+        public void PaintLine(double X1, double Y1, double X2, double Y2)
+        {
+            if (flag)
+            {
+                    float r = 1.0f;
+                    float g = 0.0f;
+                    float b = 0.0f;
+                    int intx1 = Convert.ToInt32(X1);
+                    int inty1 = Convert.ToInt32(Y1);
+                    int intx2 = Convert.ToInt32(X2);
+                    int inty2 = Convert.ToInt32(Y2);
+                    vc.Line(intx1, inty1, intx2, inty2, r, g, b);
             }
         }
     }
