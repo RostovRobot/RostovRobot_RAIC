@@ -19,8 +19,8 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
            
             //Check Position
             int[] cPos = new int[2];
-            cPos[0] = 0;
-            cPos[1] = 0;                       
+            cPos[0] = (int)(self.X/800);
+            cPos[1] = (int)(self.Y/800);                       
 
             //Заполнение массива тайлов, и массива с количеством шагов до тайла.
             Tile[,] masOfTiles= new Tile[world.Width,world.Height];
@@ -70,7 +70,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 int min = i;
                 foreach(Tile tile in sosedsOfTile)
                 {
-                    if((mapI[tile.X,tile.Y]<i)&&(mapI[tile.X, tile.Y]!=1))
+                    if((mapI[tile.X,tile.Y]<i)&&(mapI[tile.X, tile.Y]!=-1))
                     {
                         min = mapI[tile.X, tile.Y];
                         tileOfThisStep[0] = tile.X;
@@ -176,6 +176,8 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             bool isWaypoint = true;
             while (isWaypoint)
             {
+                
+                indOfStep++;
                 //Создаем массив тайлов, соседствующих с тайлами из коллекции tilesOfThisStep
                 List<Tile> thisSoseds = new List<Tile>();
                 for (int i = 0; i < tilesOfThisStep.Count; i++)
@@ -194,15 +196,19 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     if ((mapI[thisSoseds[i].X, thisSoseds[i].Y] == -1) || (mapI[thisSoseds[i].X, thisSoseds[i].Y] > indOfStep))
                         mapI[thisSoseds[i].X, thisSoseds[i].Y] = indOfStep;
                 }
-                indOfStep++;
+                tilesOfThisStep.Clear();
                 for (int i = 0; i < thisSoseds.Count; i++)
                 {
+
+                    
+                    tilesOfThisStep.Add(new int[2]);
                     tilesOfThisStep[i][0] = thisSoseds[i].X;
                     tilesOfThisStep[i][1] = thisSoseds[i].Y;
                     if((thisSoseds[i].X == self.NextWaypointX)&& (thisSoseds[i].Y == self.NextWaypointY))//Является ли проверяемый тайл следующим вейпоинтом.
                     {
                         isWaypoint = false;
                     }
+                    
                 }
             }
 

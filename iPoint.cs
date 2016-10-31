@@ -18,7 +18,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             if ((tiles[0].X == tiles[2].X) || (tiles[0].Y == tiles[2].Y))
             {
                 return new double[2] { (tiles[1].X - 0.5D) * game.TrackTileSize, (tiles[1].Y - 0.5D) * game.TrackTileSize };
-
+                //Подправь код, значение по X возвращается отрицательным(-0,5). Возможно стоит написать +0,5.
             }
             else
             {
