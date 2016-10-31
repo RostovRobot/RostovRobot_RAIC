@@ -13,14 +13,12 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
         public List<Tile> getTrace(World world, Game game, Car self)
         {
-            //НЕ НАДО ИЗМЕНЯТЬ ТИП ВОЗВРАЩАЕМОГО ЗНАЧЕНИЯ!!!!!
-            //это фундаментальная вещь для командной работы - остальные УЖЕ рассчитывают, что метод getTrace вернет коллекцию тайлов
-            //если необходимо изменить тип, то обязательно обсуждаем это (на он-лайн встрече, в группе ВК или еще где-то)
+            
            
             //Check Position
             int[] cPos = new int[2];
             cPos[0] = (int)(self.X/800);
-            cPos[1] = (int)(self.Y/800);                       
+            cPos[1] = (int)(self.Y/800);
 
             //Заполнение массива тайлов, и массива с количеством шагов до тайла.
             Tile[,] masOfTiles= new Tile[world.Width,world.Height];
@@ -37,7 +35,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             }
 
             //Получение двумерного массива с шириной и длиной world'a(в тайлах), в каждой ячейке которого содержится количество шагов от машинки, до этого тайла.
-            mapI = stepTile(masOfTiles, cPos, mapI, self);
+            mapI = stepTile(masOfTiles, cPos, mapI,self);
 
             
 
@@ -49,28 +47,89 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             }
                 
             }
+
+
             //Создание коллекции с маршрутом из моего местоположения в следующий вейпоинт, и коллекции с обратным маршрутом.
             List<Tile> wayOfTilesFromFinish = new List<Tile>();
             List<Tile> wayOfTilesFromMyPosition = new List<Tile>();
             
-            //Задаем первый тайл для прокладки маршрута - вейпоинт(его координаты)
-            int distance = mapI[self.NextWaypointX,self.NextWaypointY];
-            int[] tileOfThisStep = new int[2];
-            tileOfThisStep[0] = self.NextWaypointX;
-            tileOfThisStep[1] = self.NextWaypointY;
             
-            for(int i = distance;i>=0;i--)
+            
+            
+            int setX = self.NextWaypointX;
+            int setY = self.NextWaypointY;
+            wayOfTilesFromFinish = getNextTrace(setX, setY, mapI, masOfTiles);
+            for (int i = wayOfTilesFromFinish.Count - 1; i >= 0; i--)
             {
+                wayOfTilesFromMyPosition.Add(wayOfTilesFromFinish[i]);
+            }
+
+
+            /*//NextWayP
+            int[] nextTPos = new int[2];
+            nextTPos[0] = self.NextWaypointX;
+            nextTPos[1] = self.NextWaypointY;
+
+            List<Tile> wayBetweenNextWaypoints = new List<Tile>();
+            List<Tile> wayBetweenNextWaypoints2 = new List<Tile>();
+            setX = world.Waypoints[self.NextWaypointIndex+1][0];
+            setY = world.Waypoints[self.NextWaypointIndex+1][1];
+
+            for (int i = 0; i < world.Width; i++)
+            {
+                for (int j = 0; j < world.Height; j++)
+                {
+                    mapI[i, j] = -1;
+                }
+            }
+            mapI = stepTile(masOfTiles, nextTPos, mapI);
+            
+
+            wayBetweenNextWaypoints = getNextTrace(setX, setY, mapI, masOfTiles);
+            for (int i = wayBetweenNextWaypoints.Count - 1; i >= 0; i--)
+            {
+                wayBetweenNextWaypoints2.Add(wayBetweenNextWaypoints[i]);
+            }*/
+
+
+            List<Tile> resultTrace = new List<Tile>();
+            foreach(Tile tile in wayOfTilesFromMyPosition)
+            {
+                resultTrace.Add(tile);
+            }
+           /* foreach (Tile tile in wayBetweenNextWaypoints2)
+            {
+                
+                    resultTrace.Add(tile);
+                
+            }*/
+
+            return resultTrace;
+        }
+
+
+        public List<Tile> getNextTrace(int setX,int setY,int[,] mapI,Tile[,] masOfTiles)
+        {
+            List<Tile> wayOfTilesFromFinish = new List<Tile>();
+            //Задаем первый тайл для прокладки маршрута - вейпоинт(его координаты)
+            int distance = mapI[setX,setY];
+            int[] tileOfThisStep = new int[2];
+            tileOfThisStep[0] = setX;
+            tileOfThisStep[1] = setY;
+
+            for (int i = distance; i >= 0; i--)
+            {
+                
                 //Добавляем текущий тайл в коллекцию с маршрутом.
-                wayOfTilesFromFinish.Add(masOfTiles[tileOfThisStep[0],tileOfThisStep[1]]);
+                wayOfTilesFromFinish.Add(masOfTiles[tileOfThisStep[0], tileOfThisStep[1]]);
                 List<Tile> sosedsOfTile = new List<Tile>();
                 sosedsOfTile = getSosed(masOfTiles, tileOfThisStep);
 
                 //Выбираем следующий тайл из соседей текущего
                 int min = i;
-                foreach(Tile tile in sosedsOfTile)
+                foreach (Tile tile in sosedsOfTile)
                 {
-                    if((mapI[tile.X,tile.Y]<i)&&(mapI[tile.X, tile.Y]!=-1))
+                    if ((mapI[tile.X, tile.Y] < i) && (mapI[tile.X, tile.Y] != -1))
                     {
                         min = mapI[tile.X, tile.Y];
                         tileOfThisStep[0] = tile.X;
@@ -81,16 +140,10 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 }
 
             }
-
-
-            for(int i = wayOfTilesFromFinish.Count-1;i>=0;i--)
-            {
-                wayOfTilesFromMyPosition.Add(wayOfTilesFromFinish[i]);
-            }
-
-
-            return wayOfTilesFromMyPosition;
+            return wayOfTilesFromFinish;
         }
+
+
 
         public List<Tile> getSosed(Tile[,] masOfTiles, int[] cPos)
         {
@@ -162,7 +215,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             return masOfSoseds;
         }
 
-        public int[,] stepTile(Tile[,] masOfTiles, int[] cPos, int[,] mapI,  Car self)
+        public int[,] stepTile(Tile[,] masOfTiles, int[] cPos, int[,] mapI,Car self)
         {
             
             mapI[cPos[0], cPos[1]] = 0;
@@ -200,15 +253,28 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 for (int i = 0; i < thisSoseds.Count; i++)
                 {
 
-                    
+                    int schet = 0;
                     tilesOfThisStep.Add(new int[2]);
                     tilesOfThisStep[i][0] = thisSoseds[i].X;
                     tilesOfThisStep[i][1] = thisSoseds[i].Y;
-                    if((thisSoseds[i].X == self.NextWaypointX)&& (thisSoseds[i].Y == self.NextWaypointY))//Является ли проверяемый тайл следующим вейпоинтом.
+                    for(int k=0;k<masOfTiles.GetLength(0);k++)
+                    {
+                        for (int j = 0; j < masOfTiles.GetLength(1); j++)
+                        {
+                            if ((masOfTiles[k, j].type != TileType.Empty)&&(mapI[k,j]==-1))
+                            {
+                                schet++;
+                            }
+                        }
+                    }
+                    /*if(schet==0)
+                    {
+                        isWaypoint = false;
+                    }*/
+                    if ((thisSoseds[i].X == self.NextWaypointX) && (thisSoseds[i].Y == self.NextWaypointY))//Является ли проверяемый тайл следующим вейпоинтом.
                     {
                         isWaypoint = false;
                     }
-                    
                 }
             }
 
