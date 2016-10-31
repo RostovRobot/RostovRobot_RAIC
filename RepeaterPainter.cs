@@ -8,14 +8,19 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
     class RepeaterPainter
     {
         private VisualClient vc;
+        private bool flag = false;
         
         /// <summary>
         /// Создает клиент для отрисовки со стандартными параметрами (порт 13579)
         /// </summary>
         public RepeaterPainter()
         {
-            vc = new VisualClient("localhost", 13579);
-            vc.BeginPre();
+            try
+            {
+                vc = new VisualClient("localhost", 13579);
+                vc.BeginPost();
+                flag = true;
+            }catch(Exception e) { flag = false; }
         }
 
         /// <summary>
@@ -24,29 +29,33 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="objects">Коллекция объектов для отрисовки</param>
         public void Paint(List<PaintedObject> objects)
         {
-            try //запускаем проверку на ошибки
-            {//либо коллекция может быть пустой, либо vc может быть не создан или еще что
-                foreach (PaintedObject po in objects) //перебираем все объекты в коллекции
-                {// на каждом шаге каждый новый объект будет доступен под именем po
-                    switch (po.getType()) //узнаем тип отбъекта для отрисовки
-                    {
-                        case PaintedObjectType.Point:
-                            break;
-                        case PaintedObjectType.Line:
-                            break;
-                        case PaintedObjectType.Tile:
-                            break;
-                        case PaintedObjectType.Text:
-                            break;
-                        case PaintedObjectType.TileText:
-                            break;
-                        default:
-                            break;
+            if (flag)
+            {
+                try //запускаем проверку на ошибки
+                {//либо коллекция может быть пустой, либо vc может быть не создан или еще что
+                    foreach (PaintedObject po in objects) //перебираем все объекты в коллекции
+                    {// на каждом шаге каждый новый объект будет доступен под именем po
+                        switch (po.getType()) //узнаем тип отбъекта для отрисовки
+                        {
+                            case PaintedObjectType.Point:
+                                break;
+                            case PaintedObjectType.Line:
+                                break;
+                            case PaintedObjectType.Tile:
+                                break;
+                            case PaintedObjectType.Text:
+                                break;
+                            case PaintedObjectType.TileText:
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
-            }catch(Exception e)
-            {
+                catch (Exception e)
+                {
 
+                }
             }
         }
 
@@ -56,7 +65,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="tile">Объект-тайл для отрисовки</param>
         public void PaintTile(Tile tile)
         {
-            if(vc !=null)
+            if(flag)
             {
                 double x1 = tile.X * 800 - 400;
                 double y1 = tile.Y * 800 - 400;
@@ -73,7 +82,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="color">Цвет отрисовки из доступных в PaintColor</param>
         public void PaintTile(Tile tile, PaintColor color)
         {
-            if (vc != null)
+            if (flag)
             {
                 double x1 = tile.X * 800 - 400;
                 double y1 = tile.Y * 800 - 400;
@@ -93,7 +102,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="tileY">Координата Y тайла</param>
         public void PaintTile(int tileX, int tileY)
         {
-            if (vc != null)
+            if (flag)
             {
                 double x1 = tileX * 800 - 400;
                 double y1 = tileY * 800 - 400;
@@ -111,7 +120,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="color">Цвет отрисовки из доступных в PaintColor</param>
         public void PaintTile(int tileX, int tileY, PaintColor color)
         {
-            if (vc != null)
+            if (flag)
             {
                 double x1 = tileX * 800 - 400;
                 double y1 = tileY * 800 - 400;
@@ -130,7 +139,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="tiles">Коллекция объектов-тайлов для орисовки</param>
         public void PaintTile(List<Tile> tiles)
         {
-            if (vc != null)
+            if (flag)
             {
                 foreach (Tile tile in tiles)
                 {
@@ -150,7 +159,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="color">Цвет отрисовки из доступных в PaintColor</param>
         public void PaintTile(List<Tile> tiles, PaintColor color)
         {
-            if (vc != null)
+            if (flag)
             {
                 foreach (Tile tile in tiles)
                 {
@@ -173,7 +182,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="Y">Координата Y точки</param>
         public void PaintPoint(double X, double Y)
         {
-            if (vc != null)
+            if (flag)
             {
                 vc.Circle(X, Y, 3, 0.0f, 1.0f, 0.0f);
             }
@@ -187,7 +196,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="color">Цвет отрисовки из доступных в PaintColor</param>
         public void PaintPoint(double X, double Y, PaintColor color)
         {
-            if (vc != null)
+            if (flag)
             {
                 float r = 0.0f;
                 float g = 1.0f;
@@ -202,7 +211,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="seria">Массив координат точек, задающих линии</param>
         public void PaintLineSeria(double[] seria)
         {
-            if (vc != null && seria.Length>3)
+            if (flag && seria.Length>3)
             {
                 for(int i=1; i<seria.Length/2;i++)
                 {
@@ -222,7 +231,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         /// <param name="color">Цвет отрисовки из доступных в PaintColor</param>
         public void PaintLineSeria(double[] seria, PaintColor color)
         {
-            if (vc != null && seria.Length > 3)
+            if (flag && seria.Length > 3)
             {
                 for (int i = 1; i < seria.Length / 2; i++)
                 {

@@ -8,7 +8,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
         iPoint ipoint = new iPoint();
         Regulator regul = new Regulator();
         CrashProtect crPotect = new CrashProtect();
-        //RepeaterPainter painter = new RepeaterPainter();
+        RepeaterPainter painter = new RepeaterPainter();
 
 
         public void Move(Car self, World world, Game game, Move move) {
@@ -20,16 +20,16 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
                 } else {
                     List<Tile> traceTiles = tracer.getTrace(world, game, self);
                     //вот тут мы отрисовываем полученную коллекцию тайлов
-                    //painter.PaintTile(traceTiles);
+                    painter.PaintTile(traceTiles);
 
-                    double[] nextPointCoordinate = ipoint.getNextPointXY(traceTiles, world, game, self);
+                    double[] nextPointCoordinate = ipoint.getPointXY(traceTiles, world, game, self);
                     //вот тут мы отрисовываем полученный массив точек
                     if (nextPointCoordinate.Length > 3) //если в массиве больше 3 значений (две и больше точек в массиве)
                     { //то
-                        //painter.PaintLineSeria(nextPointCoordinate); //отрисовываем последовательность линий
+                        painter.PaintLineSeria(nextPointCoordinate); //отрисовываем последовательность линий
                     }else
                     { //иначе
-                        //if(nextPointCoordinate.Length>1) painter.PaintPoint(nextPointCoordinate[0], nextPointCoordinate[1]); //отрисовываем одну точку
+                        if(nextPointCoordinate.Length>1) painter.PaintPoint(nextPointCoordinate[0], nextPointCoordinate[1]); //отрисовываем одну точку
                     }
 
                     int[] nextPointIntCoordinate = new int[nextPointCoordinate.Length];
