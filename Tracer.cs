@@ -107,6 +107,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
             
             List<Tile> resultTrace = new List<Tile>();
+            resultTrace.Add(masOfTiles[(int)(self.X/800), (int)(self.Y / 800)]);
             foreach(Tile tile in wayOfTilesFromMyPosition)
             {
                 resultTrace.Add(tile);
