@@ -20,6 +20,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             cPos[0] = (int)(self.X/800);
             cPos[1] = (int)(self.Y/800);
 
+            int nextX = self.NextWaypointX;
+            int nextY = self.NextWaypointY;
+
             //Заполнение массива тайлов, и массива с количеством шагов до тайла.
             Tile[,] masOfTiles= new Tile[world.Width,world.Height];
             int[,] mapI = new int[world.Width, world.Height];
@@ -35,7 +38,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             }
 
             //Получение двумерного массива с шириной и длиной world'a(в тайлах), в каждой ячейке которого содержится количество шагов от машинки, до этого тайла.
-            mapI = stepTile(masOfTiles, cPos, mapI,self);
+            mapI = stepTile(masOfTiles, cPos, mapI, nextX, nextY);
 
             
 
@@ -65,16 +68,16 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             }
 
 
-            /*//NextWayP
-            int[] nextTPos = new int[2];
-            nextTPos[0] = self.NextWaypointX;
-            nextTPos[1] = self.NextWaypointY;
+            //NextWayP
+            cPos[0] = self.NextWaypointX;
+            cPos[1] = self.NextWaypointY;
 
             List<Tile> wayBetweenNextWaypoints = new List<Tile>();
             List<Tile> wayBetweenNextWaypoints2 = new List<Tile>();
-            setX = world.Waypoints[self.NextWaypointIndex+1][0];
-            setY = world.Waypoints[self.NextWaypointIndex+1][1];
-
+            nextX = world.Waypoints[self.NextWaypointIndex+1][0];
+            nextY = world.Waypoints[self.NextWaypointIndex+1][1];
+            setX = nextX;
+            setY = nextY;
             for (int i = 0; i < world.Width; i++)
             {
                 for (int j = 0; j < world.Height; j++)
@@ -82,27 +85,27 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     mapI[i, j] = -1;
                 }
             }
-            mapI = stepTile(masOfTiles, nextTPos, mapI);
+            mapI = stepTile(masOfTiles, cPos, mapI,nextX,nextY);
             
 
             wayBetweenNextWaypoints = getNextTrace(setX, setY, mapI, masOfTiles);
             for (int i = wayBetweenNextWaypoints.Count - 1; i >= 0; i--)
             {
                 wayBetweenNextWaypoints2.Add(wayBetweenNextWaypoints[i]);
-            }*/
+            }
 
-
+            
             List<Tile> resultTrace = new List<Tile>();
             foreach(Tile tile in wayOfTilesFromMyPosition)
             {
                 resultTrace.Add(tile);
             }
-           /* foreach (Tile tile in wayBetweenNextWaypoints2)
+            foreach (Tile tile in wayBetweenNextWaypoints2)
             {
                 
                     resultTrace.Add(tile);
                 
-            }*/
+            }
 
             return resultTrace;
         }
@@ -187,7 +190,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     break;
 
                 case TileType.BottomHeadedT:
-                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
                     masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
                     masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
                     break;
@@ -195,17 +198,17 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 case TileType.LeftHeadedT:
                     masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
                     masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
-                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
                     break;
 
                 case TileType.RightHeadedT:
                     masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
                     masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
-                    masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
+                    masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
                     break;
 
                 case TileType.TopHeadedT:                  
-                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] + 1]);
+                    masOfSoseds.Add(masOfTiles[cPos[0], cPos[1] - 1]);
                     masOfSoseds.Add(masOfTiles[cPos[0] + 1, cPos[1]]);
                     masOfSoseds.Add(masOfTiles[cPos[0] - 1, cPos[1]]);
                     break;
@@ -215,7 +218,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             return masOfSoseds;
         }
 
-        public int[,] stepTile(Tile[,] masOfTiles, int[] cPos, int[,] mapI,Car self)
+        public int[,] stepTile(Tile[,] masOfTiles, int[] cPos, int[,] mapI, int nextX, int nextY)
         {
             
             mapI[cPos[0], cPos[1]] = 0;
@@ -271,7 +274,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     {
                         isWaypoint = false;
                     }*/
-                    if ((thisSoseds[i].X == self.NextWaypointX) && (thisSoseds[i].Y == self.NextWaypointY))//Является ли проверяемый тайл следующим вейпоинтом.
+                    if ((thisSoseds[i].X == nextX) && (thisSoseds[i].Y == nextY))//Является ли проверяемый тайл следующим вейпоинтом.
                     {
                         isWaypoint = false;
                     }
