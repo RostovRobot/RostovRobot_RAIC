@@ -15,9 +15,11 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
             if (world.Tick > game.InitialFreezeDurationTicks) //проверяем, что прошло уже 300 первых тиков бездействия
             {
                 painter.startTick();
-                if (crPotect.isCrash(self, move))
+                if (crPotect.isCrash(self))
                 {
                     //вызов действий при залипании
+                    crPotect.CrashedMove(move,self);
+
                 } else {
                     List<Tile> traceTiles = tracer.getTrace(world, game, self);
                     //вот тут мы отрисовываем полученную коллекцию тайлов
