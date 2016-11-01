@@ -74,17 +74,28 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
             List<Tile> wayBetweenNextWaypoints = new List<Tile>();
             List<Tile> wayBetweenNextWaypoints2 = new List<Tile>();
-            nextX = world.Waypoints[self.NextWaypointIndex+1][0];
-            nextY = world.Waypoints[self.NextWaypointIndex+1][1];
+            
+            
+            if ((self.NextWaypointX != world.Waypoints[(world.Waypoints.GetLength(0) - 1)][0]) || (self.NextWaypointY != world.Waypoints[(world.Waypoints.GetLength(0) - 1)][1]))
+            {
+                nextX = world.Waypoints[self.NextWaypointIndex + 1][0];
+                nextY = world.Waypoints[self.NextWaypointIndex + 1][1];
+                
+            }
+            else
+            {
+                nextX = world.Waypoints[0][0];
+                nextY = world.Waypoints[0][1];
+            }
             setX = nextX;
             setY = nextY;
             for (int i = 0; i < world.Width; i++)
-            {
-                for (int j = 0; j < world.Height; j++)
                 {
-                    mapI[i, j] = -1;
+                    for (int j = 0; j < world.Height; j++)
+                    {
+                        mapI[i, j] = -1;
+                    }
                 }
-            }
             mapI = stepTile(masOfTiles, cPos, mapI,nextX,nextY);
             
 
