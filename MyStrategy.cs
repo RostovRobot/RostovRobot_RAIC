@@ -41,7 +41,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
                     {
                         nextPointIntCoordinate[i] = Convert.ToInt32(nextPointCoordinate[i]);
                     }
-
+                    if(self.EnginePower>=0)
                     move.WheelTurn = regul.getU(nextPointIntCoordinate[0], nextPointIntCoordinate[1], self);
                     move.EnginePower = 0.5D;
                     painter.endTick();
