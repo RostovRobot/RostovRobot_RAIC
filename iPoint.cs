@@ -34,7 +34,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
 
         }
-        double k = 0.3;//Коэффицент смещения от центра тайла Мах=0.5, Min=0;
+        double k = 0.6;//Коэффицент смещения от центра тайла Мах=1, Min=0;
 
 
         public double[] getPointXY(List<Tile> tiles, World world, Game game, Car self,int i)//Возвращаем ипервичную, необработанную координату для данного , i-того тайла из массива.
@@ -107,9 +107,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 }
                 else
                 {
-                    double X = (tiles[i].X + 0.5D) * game.TrackTileSize + (tiles[i + 1].X - tiles[i - 1].X) * k * game.TrackTileSize;
-                    double Y = (tiles[i].Y + 0.5D) * game.TrackTileSize + (tiles[i + 1].Y - tiles[i - 1].Y) * k * game.TrackTileSize;
-                    a= new double[2] { X, Y };//Try again
+                    double X = (tiles[i].X + 0.5D) * game.TrackTileSize + ((tiles[i + 1].X + tiles[i - 1].X+1D) * 0.5D * game.TrackTileSize- (tiles[i].X + 0.5D) * game.TrackTileSize)*k;//X = (tiles[i].X + 0.5D) * game.TrackTileSize + (tiles[i + 1].X - tiles[i - 1].X) * k * game.TrackTileSize;
+                    double Y = (tiles[i].Y + 0.5D) * game.TrackTileSize+  ((tiles[i - 1].Y + tiles[i + 1].Y+1D) * 0.5D * game.TrackTileSize- (tiles[i].Y + 0.5D) * game.TrackTileSize)*k;//Y = (tiles[i].Y + 0.5D) * game.TrackTileSize+  (tiles[i - 1].Y - tiles[i + 1].Y) * k * game.TrackTileSize;
+                    a = new double[2] { X, Y };//Try again
                 }
                 points[2*i-2] = a[0];
                 points[2*i-1] = a[1];
