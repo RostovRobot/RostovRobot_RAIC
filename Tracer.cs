@@ -120,7 +120,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             tileOfThisStep[0] = setX;
             tileOfThisStep[1] = setY;
 
-            for (int i = distance; i >= 0; i--)
+            for (int i = distance; i > 0; i--)
             {
                 
                 //Добавляем текущий тайл в коллекцию с маршрутом.
