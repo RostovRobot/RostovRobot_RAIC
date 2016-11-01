@@ -246,8 +246,10 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 {
                     List<Tile> sosGet = new List<Tile>();
                     sosGet = getSosed(masOfTiles, tilesOfThisStep[i]);
+                    
                     foreach (Tile tile in sosGet)
                     {
+                        if((mapI[tile.X,tile.Y])==-1)
                         thisSoseds.Add(tile);
                     }
                 }
@@ -266,7 +268,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                     tilesOfThisStep.Add(new int[2]);
                     tilesOfThisStep[i][0] = thisSoseds[i].X;
                     tilesOfThisStep[i][1] = thisSoseds[i].Y;
-                    for(int k=0;k<masOfTiles.GetLength(0);k++)
+                    /*for(int k=0;k<masOfTiles.GetLength(0);k++)
                     {
                         for (int j = 0; j < masOfTiles.GetLength(1); j++)
                         {
@@ -276,11 +278,11 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                             }
                         }
                     }
-                    /*if(schet==0)
+                    if(schet==0)
                     {
                         isWaypoint = false;
                     }*/
-                    if ((thisSoseds[i].X == nextX) && (thisSoseds[i].Y == nextY))//Является ли проверяемый тайл следующим вейпоинтом.
+                    if (((thisSoseds[i].X == nextX) && (thisSoseds[i].Y == nextY)))//Является ли проверяемый тайл следующим вейпоинтом.
                     {
                         isWaypoint = false;
                     }
