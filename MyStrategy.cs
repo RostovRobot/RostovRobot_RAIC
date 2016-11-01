@@ -23,7 +23,8 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk {
                     //вот тут мы отрисовываем полученную коллекцию тайлов
                     painter.PaintTile(traceTiles);
 
-                    double[] nextPointCoordinate = ipoint.getPointXY(traceTiles, world, game, self);
+                    //double[] nextPointCoordinate = ipoint.getPointXY(traceTiles, world, game, self);
+                    double[] nextPointCoordinate = ipoint.getStandartPoints(traceTiles, world, game, self);
                     //вот тут мы отрисовываем полученный массив точек
                     if (nextPointCoordinate.Length > 3) //если в массиве больше 3 значений (две и больше точек в массиве)
                     { //то
