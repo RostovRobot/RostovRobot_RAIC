@@ -54,14 +54,9 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
 
             //Создание коллекции с маршрутом из моего местоположения в следующий вейпоинт, и коллекции с обратным маршрутом.
             List<Tile> wayOfTilesFromFinish = new List<Tile>();
-            List<Tile> wayOfTilesFromMyPosition = new List<Tile>();
-            
-            
-            
-            
-            int setX = self.NextWaypointX;
-            int setY = self.NextWaypointY;
-            wayOfTilesFromFinish = getNextTrace(setX, setY, mapI, masOfTiles);
+            List<Tile> wayOfTilesFromMyPosition = new List<Tile>();                                             
+           
+            wayOfTilesFromFinish = getNextTrace(nextX, nextY, mapI, masOfTiles);
             for (int i = wayOfTilesFromFinish.Count - 1; i >= 0; i--)
             {
                 wayOfTilesFromMyPosition.Add(wayOfTilesFromFinish[i]);
@@ -87,8 +82,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
                 nextX = world.Waypoints[0][0];
                 nextY = world.Waypoints[0][1];
             }
-            setX = nextX;
-            setY = nextY;
+            
             for (int i = 0; i < world.Width; i++)
                 {
                     for (int j = 0; j < world.Height; j++)
@@ -99,7 +93,7 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
             mapI = stepTile(masOfTiles, cPos, mapI,nextX,nextY);
             
 
-            wayBetweenNextWaypoints = getNextTrace(setX, setY, mapI, masOfTiles);
+            wayBetweenNextWaypoints = getNextTrace(nextX, nextY, mapI, masOfTiles);
             for (int i = wayBetweenNextWaypoints.Count - 1; i >= 0; i--)
             {
                 wayBetweenNextWaypoints2.Add(wayBetweenNextWaypoints[i]);
@@ -123,14 +117,14 @@ namespace Com.CodeGame.CodeRacing2015.DevKit.CSharpCgdk
         }
 
 
-        public List<Tile> getNextTrace(int setX,int setY,int[,] mapI,Tile[,] masOfTiles)
+        public List<Tile> getNextTrace(int nextX,int nextY,int[,] mapI,Tile[,] masOfTiles)
         {
             List<Tile> wayOfTilesFromFinish = new List<Tile>();
             //Задаем первый тайл для прокладки маршрута - вейпоинт(его координаты)
-            int distance = mapI[setX,setY];
+            int distance = mapI[nextX,nextY];
             int[] tileOfThisStep = new int[2];
-            tileOfThisStep[0] = setX;
-            tileOfThisStep[1] = setY;
+            tileOfThisStep[0] = nextX;
+            tileOfThisStep[1] = nextY;
 
             for (int i = distance; i > 0; i--)
             {
